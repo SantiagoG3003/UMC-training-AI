@@ -1,0 +1,50 @@
+UMC Training AI
+Aplicación web para la gestión de evaluaciones de competencias de colaboradores, con calificación automática mediante inteligencia artificial (Gemini).
+
+¿Qué hace la aplicación?
+
+La plataforma tiene dos roles de usuario, que inician sesión con Firebase Authentication:
+
+-Evaluador
+Ve un dashboard general con métricas.
+Gestiona colaboradores.
+Gestiona y revisa evaluaciones.
+
+-Colaborador
+Tiene su propio portal con sus competencias asignadas.
+Presenta sus evaluaciones.
+Consulta su historial e indicadores de progreso.
+
+Cuando un colaborador responde una evaluación, el backend envía sus respuestas al modelo de IA (Gemini), que las analiza y devuelve automáticamente una calificación (score), un nivel (Inicial / En desarrollo / Competente / Avanzado), un resumen, fortalezas, áreas de mejora y recomendaciones. Es decir, la IA es quien califica: no hay reglas fijas de negocio decidiendo la nota.
+
+El login funciona así:
+El frontend autentica al usuario directamente contra Firebase (email + contraseña) y obtiene un ID token.
+El backend nunca ve la contraseña: solo recibe ese token, lo valida con Firebase Admin y busca el perfil del usuario (nombre, rol) en Firestore.
+Según el rol devuelto (evaluador o colaborador), el frontend decide a qué vista mandar al usuario.
+
+Requisitos previos
+Node.js instalado.
+Un proyecto de Firebase con Authentication y Firestore habilitados.
+Una API key de Gemini, gratuita en https://aistudio.google.com/apikey.
+
+Completa el archivo .env con:
+FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY.
+GEMINI_API_KEY (de aistudio.google.com/apikey).
+
+
+-Cómo ejecutarla
+
+1. Backend:
+
+cd "Poryecto UMC/Backend/backend"
+npm install
+cp .env.example .env
+
+Luego inicia el servidor:
+
+2. Frontend:
+En otra terminal Gitbash:
+
+cd "Poryecto UMC/Frontend"
+npm install
+npm run dev
