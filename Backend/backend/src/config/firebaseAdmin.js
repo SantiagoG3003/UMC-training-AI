@@ -15,8 +15,7 @@ import path from "node:path";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // src/config/ -> src/ -> backend/ -> Backend/serviceAccountKey.json
-const serviceAccountPath = path.resolve(__dirname, "../../../serviceAccountKey.json");
-
+const serviceAccountPath = path.resolve(__dirname, "../../serviceAccountKey.json");
 function loadServiceAccount() {
   let raw;
   try {
